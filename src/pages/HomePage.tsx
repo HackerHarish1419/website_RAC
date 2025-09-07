@@ -1,0 +1,274 @@
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FiUsers, FiAward, FiHeart, FiGlobe } from 'react-icons/fi';
+import AnimatedCounter from '../components/AnimatedCounter';
+import ProjectCard from '../components/ProjectCard';
+
+export default function HomePage() {
+  const heroImages = [
+    "/gallery/WhatsApp Image 2025-08-11 at 23.23.53_d9a3a398.jpg",
+    "/gallery/IMG-20250811-WA0092.jpg",
+    "/gallery/IMG-20250811-WA0090.jpg",
+  ];
+
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(intervalId);
+  }, [heroImages.length]);
+  // Sample data - replace with actual data
+  const featuredProjects = [
+    {
+      title: "Guru Prashansa",
+      date: "5th September 2024",
+      location: "Rajalakshmi Engineering College",
+      description: "A heartfelt Teachers’ Day tribute celebrating mentorship and guidance.",
+      image: "/Communityservice/Guru_Prashansa.jpg"
+    },
+    {
+      title: "Udhiram",
+      date: "12th October 2024, 3rd April 2025",
+      location: "Indoor Auditorium, Rajalakshmi Engineering College",
+      description: "A successful blood donation camp uniting students for a life-saving cause.",
+      image: "/Communityservice/Udhiram.jpg"
+    },
+        {
+      id: 17,
+      title: "Victo-Ryla",
+      date: "30 April 2025",
+      location: "Rajalakshmi Engineering College",
+      description: "Empowering youth through leadership, confidence, and service.",
+      image: "/Professonialservice/Victo_Ryla.jpg",
+      category: "professional",
+      details: "VICTO-RYLA ‘25 was a one-day leadership summit by the Rotaract Club of Rajalakshmi Engineering College, designed to inspire and empower young individuals through impactful sessions and engaging activities. With powerful talks from renowned speakers including entrepreneurs, innovators, AI specialists, and mental health advocates, the event fostered leadership skills, confidence, and a spirit of service among youth."
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      role: "President 2023-24",
+      quote: "RCREC has transformed my leadership skills and taught me the true meaning of service above self.",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+    },
+    {
+      name: "Arjun Kumar",
+      role: "Vice President",
+      quote: "The projects we've undertaken have made a real difference in our community. It's incredibly rewarding.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+    },
+    {
+      name: "Meera Patel",
+      role: "Secretary",
+      quote: "Being part of RCREC has given me opportunities to grow both personally and professionally.",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          {heroImages.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt="Hero Background"
+              className={`absolute inset-0 w-full h-full object-cover filter brightness-110 contrast-105 saturate-110 transition-opacity duration-1000 ${
+                i === heroIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+          {/* Slider dots */}
+          <div className="absolute bottom-6 left-0 right-0 flex items-center justify-center gap-2 z-10">
+            {heroImages.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => setHeroIndex(i)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  i === heroIndex ? 'bg-white shadow-md w-6' : 'bg-white/50 hover:bg-white/80'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+        
+        <div className="relative z-10 container-custom flex items-center justify-between w-full">
+          {/* Left Side - Text Content */}
+          <motion.div
+            className="text-white max-w-2xl flex-1 text-left"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-sans text-left">
+            Creating Leaders.<br />
+            Crafting Legacies.
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-left">
+              The Rotaract Club of Rajalakshmi Engineering College is where passion meets purpose. Discover how we're making a difference.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/impact" className="btn-primary">
+                Explore Our Projects
+              </Link>
+              <Link to="/team" className="btn-secondary">
+                Meet the Team
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right Side - RCREC Logo */}
+          <motion.div
+            className="hidden lg:flex items-center justify-end pr-20 flex-1"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="text-right">
+              <div className="w-56 h-56 md:w-64 md:h-64 flex items-center justify-center mb-4">
+                <img src="/club_logo_1_1.png" alt="RCREC logo" className="max-w-full max-h-full object-contain drop-shadow-2xl" />
+              </div>
+              {/* <h2 className="text-3xl font-bold text-white">RACREC</h2>
+              <p className="text-primary text-lg mt-2 font-semibold">Rotaract Club</p> */}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Impact Numbers Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-text-dark mb-4">
+              Our Impact in Numbers
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Making a difference one project at a time
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: FiUsers, number: 50, label: "Active members", color: "text-primary" },
+              { icon: FiAward, number: 37, label: "Projects Completed", color: "text-secondary" },
+              { icon: FiHeart, number: 5000, label: "Lives Impacted", color: "text-primary" },
+              { icon: FiGlobe, number: 4, label: "Avenues", color: "text-secondary" }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="text-center"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className={`text-4xl mb-4 ${item.color}`}>
+                  <item.icon className="mx-auto" />
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-text-dark mb-2">
+                  <AnimatedCounter end={item.number} />
+                </div>
+                <p className="text-gray-600 font-medium">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-text-dark mb-4">
+              Our signature Projects
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Discover the impactful projects we've been working on
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProjects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <ProjectCard {...project} />
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link to="/impact" className="btn-primary">
+              View All Projects
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-text-dark mb-4">
+              What Our Members Say
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Hear from the people who make RCREC special
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-lg"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+              <div className="mb-4">
+                <h3 className="font-semibold text-text-dark">{testimonial.name}</h3>
+                <p className="text-sm text-gray-600">{testimonial.role}</p>
+              </div>
+                <p className="text-gray-700 italic">"{testimonial.quote}"</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};

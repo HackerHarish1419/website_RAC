@@ -1,0 +1,8 @@
+Event Name: Figma Flow
+Date: 28th August, 2024
+Venue: Online (Google Meet)
+Short Description:
+A virtual session introducing students to UI/UX design with a focus on Figma, covering design thinking, user-centered approaches, and practical demonstrations.
+
+One-liner:
+Interactive virtual session on UI/UX design with Figma, blending theory and hands-on practice.
