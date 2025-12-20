@@ -5,6 +5,11 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
+import bcrypt
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +17,14 @@ CORS(app)
 # Configuration
 PROJECTS_FILE = 'projects.json'
 GALLERY_FILE = 'gallery.json'
-ADMIN_PASSWORD = '#Rotaract@RACREC'  # Change this to a secure password
+# Load hashed password from environment variable
+ADMIN_PASSWORD_HASH = os.getenv('ADMIN_PASSWORD_HASH')
+if not ADMIN_PASSWORD_HASH:
+    print("⚠️  WARNING: ADMIN_PASSWORD_HASH not found in environment variables!")
+    print("Please run 'python setup_password.py' to set up your admin password.")
+    ADMIN_PASSWORD_HASH = bcrypt.hashpw('#Rotaract@RACREC'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    print(f"Using temporary password hash. Please set up properly for production.")
+
 UPLOAD_FOLDER = 'uploads'
 GALLERY_FOLDER = 'gallery_uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
@@ -40,8 +52,21 @@ def save_projects(projects):
         json.dump(projects, f, indent=2)
 
 def verify_password(password):
-    """Verify admin password"""
-    return password == ADMIN_PASSWORD
+    """Verify admin password using bcrypt"""
+    if not password:
+        print("DEBUG: No password provided")
+        return False
+    try:
+        # Compare provided password with stored hash
+        print(f"DEBUG: Checking password against hash...")
+        print(f"DEBUG: Password length: {len(password)}")
+        print(f"DEBUG: Hash: {ADMIN_PASSWORD_HASH[:20]}...")
+        result = bcrypt.checkpw(password.encode('utf-8'), ADMIN_PASSWORD_HASH.encode('utf-8'))
+        print(f"DEBUG: Verification result: {result}")
+        return result
+    except Exception as e:
+        print(f"Password verification error: {e}")
+        return False
 
 def load_gallery():
     """Load gallery images from JSON file"""
