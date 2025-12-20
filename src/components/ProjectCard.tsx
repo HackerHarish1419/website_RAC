@@ -10,9 +10,10 @@ interface ProjectCardProps {
   image: string;
   details?: string;
   gallery?: string[];
+  priority?: boolean;
 }
 
-const ProjectCard = ({ title, date, location, description, image, details, gallery }: ProjectCardProps) => {
+const ProjectCard = ({ title, date, location, description, image, details, gallery, priority = false }: ProjectCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -25,10 +26,13 @@ const ProjectCard = ({ title, date, location, description, image, details, galle
         viewport={{ once: true }}
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-video overflow-hidden bg-gray-200">
           <img
             src={image}
             alt={title}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "low"}
+            decoding="async"
             className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
           />
         </div>

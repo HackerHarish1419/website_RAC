@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiUsers, FiAward, FiHeart, FiGlobe } from 'react-icons/fi';
 import AnimatedCounter from '../components/AnimatedCounter';
-import ProjectCard from '../components/ProjectCard';
+import CircularGallery from '../components/CircularGallery';
 
 export default function HomePage() {
   const heroImages = [
@@ -23,13 +23,15 @@ export default function HomePage() {
   // Sample data - replace with actual data
   const featuredProjects = [
     {
+      id: 1,
       title: "Guru Prashansa",
       date: "5th September 2024",
       location: "Rajalakshmi Engineering College",
-      description: "A heartfelt Teachers’ Day tribute celebrating mentorship and guidance.",
+      description: "A heartfelt Teachers' Day tribute celebrating mentorship and guidance.",
       image: "/Communityservice/Guru_Prashansa.jpg"
     },
     {
+      id: 2,
       title: "Udhiram",
       date: "12th October 2024, 3rd April 2025",
       location: "Indoor Auditorium, Rajalakshmi Engineering College",
@@ -37,14 +39,14 @@ export default function HomePage() {
       image: "/Communityservice/Udhiram.jpg"
     },
         {
-      id: 17,
+      id: 3,
       title: "Victo-Ryla",
       date: "30 April 2025",
       location: "Rajalakshmi Engineering College",
       description: "Empowering youth through leadership, confidence, and service.",
       image: "/Professonialservice/Victo_Ryla.jpg",
       category: "professional",
-      details: "VICTO-RYLA ‘25 was a one-day leadership summit by the Rotaract Club of Rajalakshmi Engineering College, designed to inspire and empower young individuals through impactful sessions and engaging activities. With powerful talks from renowned speakers including entrepreneurs, innovators, AI specialists, and mental health advocates, the event fostered leadership skills, confidence, and a spirit of service among youth."
+      details: "VICTO-RYLA '25 was a one-day leadership summit by the Rotaract Club of Rajalakshmi Engineering College, designed to inspire and empower young individuals through impactful sessions and engaging activities. With powerful talks from renowned speakers including entrepreneurs, innovators, AI specialists, and mental health advocates, the event fostered leadership skills, confidence, and a spirit of service among youth."
     },
   ];
 
@@ -79,6 +81,8 @@ export default function HomePage() {
               key={src}
               src={src}
               alt="Hero Background"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
               className={`absolute inset-0 w-full h-full object-cover filter brightness-110 contrast-105 saturate-110 transition-opacity duration-1000 ${
                 i === heroIndex ? 'opacity-100' : 'opacity-0'
               }`}
@@ -205,19 +209,19 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <ProjectCard {...project} />
-              </motion.div>
-            ))}
-          </div>
+          {/* Circular Gallery */}
+          <CircularGallery 
+            items={featuredProjects.map(project => ({
+              image: project.image,
+              text: project.title
+            }))}
+            bend={3}
+            textColor="#000000"
+            borderRadius={0.05}
+            font="bold 24px Figtree"
+            scrollSpeed={2}
+            scrollEase={0.05}
+          />
 
           <motion.div
             className="text-center mt-12"

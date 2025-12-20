@@ -1,15 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
+import { API_BASE_URL } from '../config';
 
 const ImpactPage = () => {
-  const [activeFilter, setActiveFilter] = useState('club');
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Sample data - replace with actual project data
-  const projects = [
-    
-    
-    
+  // Fetch projects from backend API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/projects`);
+        const data = await response.json();
+        // Map backend projects to display format and combine with existing hardcoded ones
+        const backendProjects = data.map((p: any) => ({
+          id: p.id + 1000, // Offset to avoid conflicts
+          title: p.title,
+          date: p.createdAt ? new Date(p.createdAt).toLocaleDateString() : 'Recent',
+          location: 'RACREC',
+          description: p.description,
+          image: p.image ? `${API_BASE_URL}/uploads/${p.image}` : '/default-image.jpg',
+          category: p.avenue,
+          details: p.description,
+          isSignature: p.isSignature,
+          status: p.status
+        }));
+        setProjects(backendProjects);
+        setLoading(false);
+      } catch (error) {
+        console.log('Backend not available, using default projects');
+        // If backend is not available, use default projects
+        setProjects(defaultProjects);
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  // Default hardcoded projects (fallback)
+  const defaultProjects = [
     // Community Service events from public/Communityservice
     {
       id: 10,
@@ -155,7 +187,7 @@ const ImpactPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <section className="section-padding bg-white">
+      <section className="section-padding-top bg-white">
         <div className="container-custom">
           <motion.div
             className="text-center"
@@ -197,32 +229,40 @@ const ImpactPage = () => {
             ))}
           </motion.div>
 
-          {/* Projects Grid */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            layout
-          >
-            <AnimatePresence mode="wait">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ 
-                    duration: 0.3,
-                    delay: index * 0.1,
-                    layout: { duration: 0.3 }
-                  }}
-                >
-                  <ProjectCard {...project} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-12">
+              <p className="text-gray-600">Loading projects...</p>
+            </div>
+          )}
 
-          {filteredProjects.length === 0 && (
+          {/* Projects Grid */}
+          {!loading && (
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              layout
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project, index) => (
+                  <motion.div
+                    key={`${activeFilter}-${project.id}`}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ 
+                      duration: 0.3,
+                      delay: index * 0.05
+                    }}
+                  >
+                    <ProjectCard {...project} priority={index < 3} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          )}
+
+          {!loading && filteredProjects.length === 0 && (
             <motion.div
               className="text-center py-12"
               initial={{ opacity: 0 }}
@@ -257,8 +297,8 @@ const ImpactPage = () => {
             {[
               { number: projects.length, label: "Total Projects", color: "text-primary" },
               { number: 5000, label: "Lives Impacted", color: "text-accent" },
-              { number: 150, label: "Volunteers", color: "text-primary" },
-              { number: 25, label: "Partners", color: "text-accent" }
+              { number: 49, label: "Volunteers", color: "text-primary" },
+              { number: 15, label: "Years in Services", color: "text-accent" }
             ].map((stat, index) => (
               <motion.div
                 key={index}

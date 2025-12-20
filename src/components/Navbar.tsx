@@ -6,7 +6,6 @@ import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [aboutDropdown, setAboutDropdown] = useState(false);
-  const [impactDropdown, setImpactDropdown] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -45,6 +44,8 @@ const Navbar = () => {
             <img
               src="/club_logo_1_1.png"
               alt="RCREC logo"
+              loading="eager"
+              decoding="async"
               className="w-10 h-10 rounded-full object-cover shadow-lg border-2 border-white border-opacity-30 bg-white"
             />
             <span className="font-bold text-xl">RACREC</span>
@@ -68,14 +69,14 @@ const Navbar = () => {
               </button>
               <AnimatePresence>
                 {aboutDropdown && (
-                                     <motion.div
-                     initial={{ opacity: 0, y: -10 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     exit={{ opacity: 0, y: -10 }}
-                     className="absolute top-full left-0 mt-2 w-48 bg-white bg-opacity-95 backdrop-blur-md text-text-dark rounded-lg shadow-lg py-2 border border-gray-200"
-                     onMouseEnter={() => setAboutDropdown(true)}
-                     onMouseLeave={() => setAboutDropdown(false)}
-                   >
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-white bg-opacity-95 backdrop-blur-md text-text-dark rounded-lg shadow-lg py-2 border border-gray-200"
+                    onMouseEnter={() => setAboutDropdown(true)}
+                    onMouseLeave={() => setAboutDropdown(false)}
+                  >
                     <Link to="/story" className="block px-4 py-2 hover:bg-gray-100">
                       Our Story
                     </Link>
@@ -87,50 +88,14 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
 
-            {/* Our Impact Dropdown */}
-            <div className="relative">
-              <button
-                className="flex items-center space-x-1 hover:text-primary transition-colors px-3 py-2 rounded-full hover:bg-secondary hover:bg-opacity-30"
-                onMouseEnter={() => setImpactDropdown(true)}
-                onMouseLeave={() => setImpactDropdown(false)}
-              >
-                <span>Our Impact</span>
-                <FiChevronDown className="w-4 h-4" />
-              </button>
-              <AnimatePresence>
-                {impactDropdown && (
-                                     <motion.div
-                     initial={{ opacity: 0, y: -10 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     exit={{ opacity: 0, y: -10 }}
-                     className="absolute top-full left-0 mt-2 w-48 bg-white bg-opacity-95 backdrop-blur-md text-text-dark rounded-lg shadow-lg py-2 border border-gray-200"
-                     onMouseEnter={() => setImpactDropdown(true)}
-                     onMouseLeave={() => setImpactDropdown(false)}
-                   >
-                    <Link to="/impact" className="block px-4 py-2 hover:bg-gray-100">
-                      Projects & Events
-                    </Link>
-                    <Link to="/avenues" className="block px-4 py-2 hover:bg-gray-100">
-                      Avenues of Service
-                    </Link>
-                    <Link to="/knowledge" className="block px-4 py-2 hover:bg-gray-100">
-                      Knowledge Center
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <Link to="/impact" className="hover:text-primary transition-colors px-3 py-2 rounded-full hover:bg-secondary hover:bg-opacity-30">
+              Our Impact
+            </Link>
 
             <Link to="/gallery" className="hover:text-primary transition-colors px-3 py-2 rounded-full hover:bg-secondary hover:bg-opacity-30">
               Gallery
             </Link>
-          </div>
 
-          {/* Join Us Button */}
-          <div className="hidden md:block">
-            <Link to="/join" className="bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-secondary transition-colors shadow-lg border-2 border-white border-opacity-30">
-              Join Us
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -188,11 +153,6 @@ const Navbar = () => {
               >
                 Gallery
               </Link>
-              <div className="pt-4">
-                <Link to="/join" className="btn-primary w-full text-center block" onClick={toggleMenu}>
-                  Join Us
-                </Link>
-              </div>
             </div>
           </motion.div>
         )}

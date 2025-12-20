@@ -6,7 +6,8 @@ import StoryPage from './pages/StoryPage';
 import TeamPage from './pages/TeamPage';
 import ImpactPage from './pages/ImpactPage';
 import GalleryPage from './pages/GalleryPage';
-import JoinUsPage from './pages/JoinUsPage';
+import PixelTransitionDemo from './pages/PixelTransitionDemo';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
             <Route path="/team" element={<TeamPage />} />
             <Route path="/impact" element={<ImpactPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/join" element={<JoinUsPage />} />
+            <Route path="/pixel-transition" element={<PixelTransitionDemo />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </main>
         <Footer />

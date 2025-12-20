@@ -224,29 +224,8 @@ const StoryPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Call to Action */}
-      <section className="section-padding bg-primary text-white">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Be Part of Our Story
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join us in creating positive change and writing the next chapter of our journey together.
-            </p>
-            <button className="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Join RCREC Today
-            </button>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };
 
-export default StoryPage; 
+export default StoryPage;

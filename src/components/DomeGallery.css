@@ -1,0 +1,266 @@
+/* DomeGallery CSS */
+
+body.dg-scroll-lock {
+  overflow: hidden;
+}
+
+.sphere-root {
+  --radius: 800px;
+  --viewer-pad: 32px;
+  --overlay-blur-color: rgba(6, 0, 16, 0.5);
+  --tile-radius: 20px;
+  --enlarge-radius: 20px;
+  --image-filter: none;
+  --segments-x: 35;
+  --segments-y: 35;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.sphere-main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.sphere {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  --offset-x: 0;
+  --offset-y: 0;
+  --item-size-x: 2;
+  --item-size-y: 2;
+  --rot-x-delta: 0deg;
+  --rot-y-delta: 0deg;
+
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --unit: calc(360deg / (var(--segments-x) * 2));
+  --base-rotate-y: calc(var(--unit) * (var(--offset-x) + (var(--item-size-x) - 1) * 0.5));
+  --base-rotate-x: calc(var(--unit) * (var(--offset-y) - (var(--item-size-y) - 1) * 0.5));
+  
+  transform: 
+    rotateY(var(--base-rotate-y))
+    rotateX(var(--base-rotate-x))
+    translateZ(var(--radius))
+    rotateX(var(--rot-x-delta))
+    rotateY(var(--rot-y-delta));
+  
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+.item__image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--tile-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+}
+
+.item__image:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  transform: scale(1.1);
+}
+
+.item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: var(--image-filter);
+  transition: filter 0.3s ease;
+  opacity: 1;
+}
+
+.item__image:hover img {
+  filter: brightness(1.1);
+}
+
+.item__image--reference {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 10;
+}
+
+.overlay--blur {
+  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.edge-fade {
+  position: absolute;
+  pointer-events: none;
+  z-index: 11;
+  left: 0;
+  right: 0;
+  height: 20%;
+}
+
+.edge-fade--top {
+  top: 0;
+  background: linear-gradient(180deg, rgba(26, 26, 46, 0.6), transparent);
+}
+
+.edge-fade--bottom {
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(26, 26, 46, 0.6), transparent);
+}
+
+.viewer {
+  position: absolute;
+  inset: var(--viewer-pad);
+  pointer-events: auto;
+  z-index: 20;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  display: none;
+  background: transparent;
+}
+
+.sphere-root[data-enlarging="true"] .scrim {
+  display: block;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.enlarge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--enlarge-radius);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  z-index: 30;
+  will-change: transform, opacity;
+  background: white;
+}
+
+.enlarge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: white;
+}
+
+.enlarge-closing {
+  position: absolute;
+  border-radius: var(--enlarge-radius);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  background: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .sphere-root {
+    --radius: 600px;
+  }
+
+  .item {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sphere-root {
+    --radius: 400px;
+    --viewer-pad: 16px;
+  }
+
+  .item {
+    width: 60px;
+    height: 60px;
+  }
+
+  .item__image:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .sphere-root {
+    --radius: 300px;
+    --viewer-pad: 12px;
+  }
+
+  .item {
+    width: 50px;
+    height: 50px;
+  }
+
+  .item__image:hover {
+    transform: scale(1.02);
+  }
+}
+

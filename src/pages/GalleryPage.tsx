@@ -1,15 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { PhotoAlbum } from 'react-photo-album';
 import type { RenderPhotoProps } from 'react-photo-album';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
+import { API_BASE_URL } from '../config';
 
 const GalleryPage = () => {
   const [index, setIndex] = useState(-1);
+  const [photos, setPhotos] = useState<any[]>([]);
 
-  // Real gallery photos from public/homepagephotos
-  const photos = [
+  // Fetch gallery images from backend
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/gallery`);
+        const data = await response.json();
+        
+        // Map backend gallery to photo format
+        const galleryPhotos = data.map((img: any) => ({
+          src: `${API_BASE_URL}/gallery-uploads/${img.filename}`,
+          width: img.width,
+          height: img.height,
+          title: img.title
+        }));
+        
+        setPhotos(galleryPhotos);
+      } catch (error) {
+        console.log('Backend not available, using default gallery');
+        // Fallback to default photos
+        setPhotos(defaultPhotos);
+      }
+    };
+
+    fetchGallery();
+  }, []);
+
+  // Default gallery photos (fallback)
+  const defaultPhotos = [
     { src: "/gallery/IMG-20250811-WA0092.jpg", width: 1080, height: 1440, title: "Gallery" },
     { src: "/gallery/IMG-20250811-WA0091.jpg", width: 1080, height: 1440, title: "Gallery" },
     { src: "/gallery/IMG-20250811-WA0090.jpg", width: 1440, height: 1080, title: "Gallery" },
@@ -39,7 +67,7 @@ const GalleryPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <section className="section-padding bg-white">
+      <section className="section-padding-top bg-white">
         <div className="container-custom">
           <motion.div
             className="text-center"

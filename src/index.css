@@ -10,6 +10,56 @@
   
   body {
     @apply bg-background text-text-dark font-sans;
+    contain: layout style paint;
+  }
+}
+
+/* Image optimization - prevent layout shift */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  contain: layout style paint;
+}
+
+/* Prevent CLS from shadows and transforms */
+* {
+  box-sizing: border-box;
+}
+
+/* Optimize interactive elements for CLS */
+button, a, [role="button"], [role="link"] {
+  will-change: auto;
+  contain: layout style;
+}
+
+button:hover, a:hover, [role="button"]:hover, [role="link"]:hover {
+  will-change: opacity;
+}
+
+/* Optimize containers */
+section, [role="region"] {
+  contain: layout style;
+}
+
+/* Gallery optimization */
+.photo-album, .ra-container {
+  contain: layout style paint;
+}
+
+/* Reduce motion for slower devices */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimize for better paint performance */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
   }
 }
 
@@ -24,6 +74,10 @@
   
   .section-padding {
     @apply py-16 px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding-top {
+    @apply pt-24 pb-16 px-4 sm:px-6 lg:px-8;
   }
   
   .container-custom {

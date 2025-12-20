@@ -60,10 +60,10 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <FiMail className="w-5 h-5 text-primary" />
                 <a 
-                  href="mailto:rcrec@rajalakshmi.edu.in" 
+                  href="mailto:rotaract@rajalakshmi.edu.in" 
                   className="text-gray-300 hover:text-accent transition-colors"
                 >
-                  rcrec@rajalakshmi.edu.in
+                  rotaract@rajalakshmi.edu.in
                 </a>
               </div>
               <div className="flex items-start space-x-3">
@@ -82,7 +82,7 @@ const Footer = () => {
             <h3 className="font-semibold text-lg">Follow Us</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://instagram.com/rcrec_official"
+                  href="https://www.instagram.com/rotaractrec/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-primary hover:bg-opacity-20 transition-colors duration-300"
@@ -90,7 +90,7 @@ const Footer = () => {
                 <FiInstagram className="w-6 h-6" />
               </a>
                 <a
-                  href="https://linkedin.com/company/rcrec"
+                  href="https://www.linkedin.com/company/rotaract-rec/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white bg-opacity-10 rounded-full flex items-center justify-center hover:bg-primary hover:bg-opacity-20 transition-colors duration-300"

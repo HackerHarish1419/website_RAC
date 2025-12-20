@@ -10,46 +10,70 @@ const TeamPage = () => {
     name: "Dr. Santhanakrishnan M",
     title: "Faculty Coordinator",
     image: "public/core/WhatsApp Image 2025-08-12 at 16.08.17_92f8956d.jpg",
-    linkedin: "https://linkedin.com/in/santhanakrishnan",
-    instagram: "https://instagram.com/santhanakrishnan"
   };
 
-  const coreLeadership = [
-    { name: "RTR. ADHITHYAN M", title: "Associate Community Service Director 25-26", image: "/core/RTR. ADHITHYAN M.jpeg" },
-    { name: "RTR. ANITHA S", title: "Associate Club Service Director 25-26", image: "/core/RTR. ANITHA S.jpg" },
-    { name: "RTR. ARCHITHA M", title: "Sergeant-At-Arms 25-26", image: "/core/RTR. ARCHITHA M.jpeg" },
-    { name: "RTR. BHUVANESWARI S", title: "Associate International Service Director 25-26", image: "/core/RTR. BHUVANESWARI S.jpg" },
-    { name: "RTR. GOKULA SARATHY P S", title: "Treasurer 25-26", image: "/core/RTR. GOKULA SARATHY P S.jpg" },
-    { name: "RTR. HARISH T", title: "Technical Head 25-26", image: "/core/RTR. HARISH T.png" },
-    { name: "RTR. HARSSHITHA KUMARAVEL", title: "International Service Director 25-26", image: "/core/RTR. HARSSHITHA KUMARAVEL.jpeg" },
-    { name: "RTR. JAYAPRAKASH", title: "Membership Development Head 25-26", image: "/core/RTR. JAYAPRAKASH.jpg" },
-    { name: "RTR. KEERTANA SRIRAM", title: "Editorial Board Head 25-26", image: "/core/RTR. KEERTANA SRIRAM.jpeg" },
-    { name: "RTR. KEERTHIVASAN", title: "Photography Head 25-26", image: "/core/RTR. KEERTHIVASAN.png", imageClassName: "rotate-90 object-top scale-110" },
-    { name: "RTR. LAKSHANYA RAMESH", title: "Creatives Head 25-26", image: "/core/RTR. LAKSHANYA RAMESH.jpg" },
-    { name: "RTR. MUKESH KUMAR K", title: "Associate Membership Development Head 25-26", image: "/core/RTR. MUKESH KUMAR K.jpg" },
-    { name: "RTR. NANDHINI M", title: "Vice President 25-26", image: "/core/RTR. NANDHINI M.jpg" },
-    { name: "RTR. NETHRA SHREE T D", title: "Joint Secretary 25-26", image: "/core/RTR. NETHRA SHREE T D.jpg" },
-    { name: "RTR. PRITVI R", title: "Associate Professional Service Director 25-26", image: "/core/RTR. PRITVI R.jpg" },
-    { name: "RTR. RISHAB V", title: "Professional Service Director 25-26", image: "/core/RTR. RISHAB V.jpg" },
-    { name: "RTR. SANJIT M", title: "President 25-26", image: "/core/RTR. SANJIT M.jpeg" },
-    { name: "RTR. SHARUKH AKTHAR A", title: "Associate Creatives Head 25-26", image: "/core/RTR. SHARUKH AKTHAR A.jpeg" },
-    { name: "RTR. SHERIN BANU", title: "Community Service Director 25-26", image: "/core/RTR. SHERIN BANU.jpg" },
-    { name: "RTR. SHRINIDHI R", title: "Secretary 25-26", image: "/core/RTR. SHRINIDHI R.jpg" },
-    { name: "RTR. SA SIVA SOORYAA", title: "Club Advisor 25-26", image: "/core/RTR. SA SIVA SOORYAA.jpg" },
-    { name: "RTR. SIVA SRUTHY VGP", title: "Public Relations Officer 25-26", image: "/core/RTR. SIVA SRUTHY VGP.JPG" },
-    { name: "RTR. SIVADHARSHAN M S", title: "Deputy Sergeant-At-Arms 25-26", image: "/core/RTR. SIVADHARSHAN M S .JPG" },
-    { name: "RTR. SRIRAM BALAJI", title: "Club Service Director 25-26", image: "/core/RTR. SRIRAM BALAJI.jpg" },
-    { name: "RTR. SRISANJANA B", title: "Videography Head 25-26", image: "/core/RTR. SRISANJANA B.jpg" },
-  ];
 
-  const boardMembers: { name: string; title: string; image: string; linkedin?: string; instagram?: string }[] = [];
+const coreLeadership = [
+  { name: "Rtr. Sanjit M", title: "President 25-26", image: "/core/RTR. SANJIT M.jpeg" },
+  { name: "Rtr. Nandhini M", title: "Vice President 25-26", image: "/core/RTR. NANDHINI M.jpg" },
+  { name: "Rtr. Shrinidhi R", title: "Secretary 25-26", image: "/core/RTR. SHRINIDHI R.jpg" },
+  { name: "Rtr. Nethra Shree T D", title: "Joint Secretary 25-26", image: "/core/RTR. NETHRA SHREE T D.jpg" },
+  { name: "Rtr. Architha M", title: "Sergeant-At-Arms 25-26", image: "/core/RTR. ARCHITHA M.jpeg" },
+  { name: "Rtr. SivadHarshan M S", title: "Deputy Sergeant-At-Arms 25-26", image: "/core/RTR. SIVADHARSHAN M S .JPG" },
+  { name: "Rtr. Siva Sooryaa", title: "Club Advisor 25-26", image: "/core/RTR. SA SIVA SOORYAA.jpg" },
+  { name: "Rtr. Gokula Sarathy P S", title: "Treasurer 25-26", image: "/core/RTR. GOKULA SARATHY P S.jpg" },
+  { name: "Rtr. Siva Sruthy VGP", title: "Public Relations Officer 25-26", image: "/core/RTR. SIVA SRUTHY VGP.JPG" },
+  { name: "Rtr. Rishab V", title: "Professional Service Director 25-26", image: "/core/RTR. RISHAB V.jpg" },
+  { name: "Rtr. Pritvi R", title: "Associate Professional Service Director 25-26", image: "/core/RTR. PRITVI R.jpg" },
+  { name: "Rtr. Sriram Balaji", title: "Club Service Director 25-26", image: "/core/RTR. SRIRAM BALAJI.jpg" },
+  { name: "Rtr. Anitha S", title: "Associate Club Service Director 25-26", image: "/core/RTR. ANITHA S.jpg" },
+  { name: "Rtr. Sherin Banu", title: "Community Service Director 25-26", image: "/core/RTR. SHERIN BANU.jpg" },
+  { name: "Rtr. Adhithyan M", title: "Associate Community Service Director 25-26", image: "/core/RTR. ADHITHYAN M.jpeg" },
+  { name: "Rtr. Harsshitha Kumaravel", title: "International Service Director 25-26", image: "/core/RTR. HARSSHITHA KUMARAVEL.jpeg" },
+  { name: "Rtr. Bhuvaneswari S", title: "Associate International Service Director 25-26", image: "/core/RTR. BHUVANESWARI S.jpg" },
+  { name: "Rtr. Lakshanya Ramesh", title: "Creatives Head 25-26", image: "/core/RTR. LAKSHANYA RAMESH.jpg" },
+  { name: "Rtr. Sharukh Akthar A", title: "Associate Creatives Head 25-26", image: "/core/RTR. SHARUKH AKTHAR A.jpeg" },
+  { name: "Rtr. Keertana Sriram", title: "Editorial Board Head 25-26", image: "/core/RTR. KEERTANA SRIRAM.jpeg" },
+  { name: "Rtr. Keerthivasan", title: "Photography Head 25-26", image: "/core/RTR. KEERTHIVASAN.png", imageClassName: "rotate-90 object-top scale-110" },
+  { name: "Rtr. Srisanjana B", title: "Videography Head 25-26", image: "/core/RTR. SRISANJANA B.jpg" },
+  { name: "Rtr. Jayaprakash", title: "Membership Development Head 25-26", image: "/core/RTR. JAYAPRAKASH.jpg" },
+  { name: "Rtr. Mukesh Kumar K", title: "Associate Membership Development Head 25-26", image: "/core/RTR. MUKESH KUMAR K.jpg" },
+  { name: "RTR. HARISH T", title: "Technical Head 25-26", image: "/core/RTR. HARISH T.jpg" },
+];
 
-  const currentTeam = activeTab === 'core' ? coreLeadership : boardMembers;
+const boardCoordinators = [
+  { name: "Rtr. Aadithya R", title: "Club Coordinator 25-26", image: "/board/Aadithya R.jpeg" },
+  { name: "Rtr. Adithya N", title: "Club Coordinator 25-26", image: "/board/Adithya N.PNG" },
+  { name: "Rtr. Akshara G", title: "Club Coordinator 25-26", image: "/board/Akshara G.jpg" },
+  { name: "Rtr. Akshith R", title: "Club Coordinator 25-26", image: "/board/Akshith R.jpg" },
+  { name: "Rtr. Angel Antony", title: "Club Coordinator 25-26", image: "/board/Angel Antony.JPG" },
+  { name: "Rtr. Anuradha V", title: "Club Coordinator 25-26", image: "/board/Anuradha V.jpg" },
+  { name: "Rtr. Harish Bhuvan S", title: "Club Coordinator 25-26", image: "/board/Harish Bhuvan S.jpg" },
+  { name: "Rtr. Irfana S", title: "Club Coordinator 25-26", image: "/board/Irfana S.jpg" },
+  { name: "Rtr. K Srihari", title: "Club Coordinator 25-26", image: "/board/K Srihari.jpg" },
+  { name: "Rtr. Lakshan S", title: "Club Coordinator 25-26", image: "/board/Lakshan S.jpg" },
+  { name: "Rtr. Meenashi S", title: "Club Coordinator 25-26", image: "/board/Meenashi S.jpg" },
+  { name: "Rtr. Nandhini Velmurugan", title: "Club Coordinator 25-26", image: "/board/Nandhini Velmurugan.jpg" },
+  { name: "Rtr. Nikhilesh Anand", title: "Club Coordinator 25-26", image: "/board/Nikhilesh Anand.jpg" },
+  { name: "Rtr. Nila Elango", title: "Club Coordinator 25-26", image: "/board/Nila Elango.jpg" },
+  { name: "Rtr. Praveen R", title: "Club Coordinator 25-26", image: "/board/Praveen R.jpg" },
+  { name: "Rtr. Rubaa Kumar K S", title: "Club Coordinator 25-26", image: "/board/Rubaa Kumar K S.jpg" },
+  { name: "Rtr. Sachin Saravanan", title: "Club Coordinator 25-26", image: "/board/Sachin Saravanan.jpg" },
+  { name: "Rtr. Samyuktha K S S", title: "Club Coordinator 25-26", image: "/board/Samyuktha K S S.jpg" },
+  { name: "Rtr. Shree Nandhiga P", title: "Club Coordinator 25-26", image: "/board/Shree Nandhiga P.jpg" },
+  { name: "Rtr. Shreenidhi T", title: "Club Coordinator 25-26", image: "/board/Shreenidhi T.jpg" },
+  { name: "Rtr. Varshini S", title: "Club Coordinator 25-26", image: "/board/Varshini S.JPG" },
+  { name: "Rtr. Vinesh D", title: "Club Coordinator 25-26", image: "/board/Vinesh D.jpg" },
+  { name: "Rtr. Yugendran P", title: "Club Coordinator 25-26", image: "/board/Yugendran P.jpg" },
+  { name: "Rtr. Yuvasri K", title: "Club Coordinator 25-26", image: "/board/Yuvasri K.jpg" }
+];
+
+  const currentTeam = activeTab === 'core' ? coreLeadership : boardCoordinators;
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <section className="section-padding bg-white">
+      <section className="section-padding-top bg-white">
         <div className="container-custom">
           <motion.div
             className="text-center"
@@ -103,26 +127,6 @@ const TeamPage = () => {
               </h3>
               <p className="text-lg text-gray-600 mb-4">{facultyCoordinator.title}</p>
               <div className="flex justify-center space-x-4">
-                {facultyCoordinator.linkedin && (
-                  <a
-                    href={facultyCoordinator.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-secondary transition-colors"
-                  >
-                    LinkedIn
-                  </a>
-                )}
-                {facultyCoordinator.instagram && (
-                  <a
-                    href={facultyCoordinator.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-secondary transition-colors"
-                  >
-                    Instagram
-                  </a>
-                )}
               </div>
             </div>
           </motion.div>

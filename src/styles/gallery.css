@@ -1,0 +1,65 @@
+/* Gallery optimization for better performance */
+
+/* Prevent layout thrashing during image load */
+.ra-viewport {
+  contain: layout style paint;
+  overflow: hidden;
+}
+
+/* Optimize image rendering - prevent CLS */
+.ra-image {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+}
+
+.ra-image-container {
+  contain: layout style paint;
+  overflow: hidden;
+}
+
+/* Lightbox optimizations - prevent layout shift */
+.yarl__wrapper {
+  contain: layout style paint;
+  overflow: hidden;
+}
+
+.yarl__slide {
+  will-change: opacity;
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+.yarl__slide img {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Reduce paint areas during interactions */
+.yarl__button {
+  will-change: opacity;
+  transition: opacity 150ms ease-in-out;
+  backface-visibility: hidden;
+}
+
+/* Photo album hover states - optimize for CLS */
+[role="button"]:not(.no-inert) {
+  contain: layout style;
+  transition-property: box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Prevent shadow from causing CLS */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
