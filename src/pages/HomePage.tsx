@@ -165,8 +165,8 @@ export default function HomePage() {
                 <div className={`text-4xl mb-4 ${item.color}`}>
                   <item.icon className="mx-auto" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-text-dark mb-2">
-                  <AnimatedCounter end={item.number} />
+                <div className="text-3xl md:text-4xl font-bold text-text-dark mb-2 flex items-center justify-center">
+                  <AnimatedCounter end={item.number} />+
                 </div>
                 <p className="text-gray-600 font-medium">{item.label}</p>
               </motion.div>

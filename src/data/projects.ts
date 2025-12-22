@@ -25,7 +25,7 @@ export const projects: Project[] = [
         "avenue": "community",
         "isSignature": true,
         "status": "active",
-        "image": "/uploads/1766334252.090089_IMG_3163.JPG",
+        "image": "/public/uploads/IMG_3163.JPG",
         "createdAt": "2025-12-21T21:54:12.097867",
         "updatedAt": "2025-12-22T07:56:06.377009"
     },
@@ -39,7 +39,7 @@ export const projects: Project[] = [
         "avenue": "community",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766336011.427097_IMG-20250706-WA0149.jpg",
+        "image": "/uploads/IMG-20250706-WA0149.jpg",
         "createdAt": "2025-12-21T22:23:31.437046"
     },
     {
@@ -52,7 +52,7 @@ export const projects: Project[] = [
         "avenue": "club",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766336248.469625_IMG_0119.JPG",
+        "image": "/uploads/IMG_0119.JPG",
         "createdAt": "2025-12-21T22:27:28.488772"
     },
     {
@@ -65,7 +65,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766336473.53081_20250809_133106.jpg",
+        "image": "/uploads/20250809_133106.jpg",
         "createdAt": "2025-12-21T22:31:13.536840"
     },
     {
@@ -78,7 +78,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766336992.478559_Copy_of_IMG_1433.JPG",
+        "image": "/public/uploads/Copy of IMG_1433.JPG",
         "createdAt": "2025-12-21T22:39:52.507099",
         "updatedAt": "2025-12-21T23:14:31.122250"
     },
@@ -92,7 +92,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337091.926543_IMG-20251104-WA0016_1.jpg",
+        "image": "/public/uploads/IMG-20251104-WA0016 (1).jpg",
         "createdAt": "2025-12-21T22:41:31.929902"
     },
     {
@@ -105,7 +105,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337186.560972_d2.jpeg",
+        "image": "/uploads/d2.jpeg",
         "createdAt": "2025-12-21T22:43:06.567288"
     },
     {
@@ -118,7 +118,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337241.303522_v2.png",
+        "image": "/uploads/v2.png",
         "createdAt": "2025-12-21T22:44:01.309481"
     },
     {
@@ -131,7 +131,7 @@ export const projects: Project[] = [
         "avenue": "community",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337414.552856_20251019_115005_1.jpg",
+        "image": "/uploads/20251019_115005 (1).jpg",
         "createdAt": "2025-12-21T22:46:54.559774",
         "updatedAt": "2025-12-21T22:47:32.535920"
     },
@@ -145,7 +145,7 @@ export const projects: Project[] = [
         "avenue": "club",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337534.219281_IMG-20251104-WA0023.jpg",
+        "image": "/uploads/IMG-20251104-WA0023.jpg",
         "createdAt": "2025-12-21T22:48:54.220553"
     },
     {
@@ -158,7 +158,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337620.620755_WhatsApp_Image_2025-11-25_at_6.23.19_PM.jpeg",
+        "image": "/uploads/WhatsApp Image 2025-11-25 at 6.23.19 PM.jpeg",
         "createdAt": "2025-12-21T22:50:20.628794"
     },
     {
@@ -171,7 +171,7 @@ export const projects: Project[] = [
         "avenue": "professional",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766337895.682467_Screenshot_2025-11-30_163046.png",
+        "image": "/uploads/Screenshot 2025-11-30 163046.png",
         "createdAt": "2025-12-21T22:54:55.684543"
     },
     {
@@ -184,8 +184,8 @@ export const projects: Project[] = [
         "avenue": "club",
         "isSignature": false,
         "status": "active",
-        "image": "/uploads/1766340154.757871_Untitled_design_5-min.png",
+        "image": "/uploads/Untitled design (5)-min.png",
         "createdAt": "2025-12-21T22:59:27.352714",
         "updatedAt": "2025-12-21T23:32:34.786799"
-    }
+    },
 ];

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { API_BASE_URL } from '../config';
+import { projects as staticProjects } from '../data/projects';
 
 const GalleryPage = () => {
   const [photos, setPhotos] = useState<any[]>([]);
-  const [projectCount, setProjectCount] = useState(0);
+  const [projectCount] = useState(staticProjects.length);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Fetch gallery images from backend
@@ -27,34 +28,25 @@ const GalleryPage = () => {
       }
     };
 
-    const fetchProjectCount = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/projects`);
-        if (response.ok) {
-          const data = await response.json();
-          setProjectCount(data.length);
-        }
-      } catch (error) {
-        console.error('Failed to fetch project count:', error);
-      }
-    };
-
     fetchGallery();
-    fetchProjectCount();
   }, []);
 
   // Default gallery photos (fallback)
   const defaultPhotos = [
-    { src: "/gallery/IMG-20250811-WA0092.jpg", title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0091.jpg", title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0090.jpg", title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0089.jpg", title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0088.jpg", title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0087.jpg", title: "Gallery" },
     { src: "/gallery/WhatsApp Image 2025-08-11 at 23.23.53_d9a3a398.jpg", title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.53.44_cad40f9b.jpg", title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.54.34_96d14cf5.jpg", title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.55.09_75deba56.jpg", title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0090.jpg", title: "Gallery" },
+    { src: "/uploads/20250809_133106.jpg", title: "Gallery" },
+    { src: "/uploads/20251019_115005 (1).jpg", title: "Gallery" },
+    { src: "/uploads/Copy of IMG_1433.JPG", title: "Gallery" },
+    { src: "/uploads/d2.jpeg", title: "Gallery" },
+    { src: "/uploads/IMG_0119.JPG", title: "Gallery" },
+    { src: "/uploads/IMG_3163.JPG", title: "Gallery" },
+    { src: "/uploads/IMG-20250706-WA0149.jpg", title: "Gallery" },
+    { src: "/uploads/IMG-20251104-WA0016 (1).jpg", title: "Gallery" },
+    { src: "/uploads/IMG-20251104-WA0023.jpg", title: "Gallery" },
+    { src: "/uploads/Screenshot 2025-11-30 163046.png", title: "Gallery" },
+    { src: "/uploads/Untitled design (5)-min.png", title: "Gallery" },
+    { src: "/uploads/WhatsApp Image 2025-11-25 at 6.23.19 PM.jpeg", title: "Gallery" },
   ];
 
   return (
