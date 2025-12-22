@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { PhotoAlbum } from 'react-photo-album';
-import type { RenderPhotoProps } from 'react-photo-album';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
 import { API_BASE_URL } from '../config';
 
 const GalleryPage = () => {
-  const [index, setIndex] = useState(-1);
   const [photos, setPhotos] = useState<any[]>([]);
   const [projectCount, setProjectCount] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Fetch gallery images from backend
   useEffect(() => {
@@ -21,8 +17,6 @@ const GalleryPage = () => {
         // Map backend gallery to photo format
         const galleryPhotos = data.map((img: any) => ({
           src: `${API_BASE_URL}/gallery-uploads/${img.filename}`,
-          width: img.width,
-          height: img.height,
           title: img.title
         }));
 
@@ -51,31 +45,17 @@ const GalleryPage = () => {
 
   // Default gallery photos (fallback)
   const defaultPhotos = [
-    { src: "/gallery/IMG-20250811-WA0092.jpg", width: 1080, height: 1440, title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0091.jpg", width: 1080, height: 1440, title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0090.jpg", width: 1440, height: 1080, title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0089.jpg", width: 1080, height: 1440, title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0088.jpg", width: 1080, height: 1440, title: "Gallery" },
-    { src: "/gallery/IMG-20250811-WA0087.jpg", width: 1080, height: 1440, title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.23.53_d9a3a398.jpg", width: 1440, height: 1080, title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.53.44_cad40f9b.jpg", width: 1440, height: 1080, title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.54.34_96d14cf5.jpg", width: 1440, height: 1080, title: "Gallery" },
-    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.55.09_75deba56.jpg", width: 1440, height: 1080, title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0092.jpg", title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0091.jpg", title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0090.jpg", title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0089.jpg", title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0088.jpg", title: "Gallery" },
+    { src: "/gallery/IMG-20250811-WA0087.jpg", title: "Gallery" },
+    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.23.53_d9a3a398.jpg", title: "Gallery" },
+    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.53.44_cad40f9b.jpg", title: "Gallery" },
+    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.54.34_96d14cf5.jpg", title: "Gallery" },
+    { src: "/gallery/WhatsApp Image 2025-08-11 at 23.55.09_75deba56.jpg", title: "Gallery" },
   ];
-
-  const renderPhoto = ({ imageProps: { alt, style, ...rest } }: RenderPhotoProps<any>) => (
-    <motion.div
-      className="cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-    >
-      <img
-        alt={alt}
-        style={{ ...style, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
-        {...rest}
-      />
-    </motion.div>
-  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -112,7 +92,7 @@ const GalleryPage = () => {
                 Capturing Moments of Impact
               </h2>
               <p className="text-gray-600">
-                Click on any image to view it in full size
+                Explore our collection of memorable moments
               </p>
             </div>
           </motion.div>
@@ -121,21 +101,25 @@ const GalleryPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            className="gallery-masonry"
           >
-            <PhotoAlbum
-              photos={photos}
-              layout="masonry"
-              columns={(containerWidth) => {
-                if (containerWidth < 640) return 1;
-                if (containerWidth < 768) return 2;
-                if (containerWidth < 1024) return 3;
-                return 4;
-              }}
-              spacing={16}
-              padding={8}
-              renderPhoto={renderPhoto}
-              onClick={({ index }) => setIndex(index)}
-            />
+            {photos.map((photo, index) => (
+              <motion.div
+                key={index}
+                className="gallery-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => setSelectedImage(photo.src)}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.title || 'Gallery image'}
+                  loading={index < 8 ? "eager" : "lazy"}
+                />
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Gallery Stats */}
@@ -169,49 +153,134 @@ const GalleryPage = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
-      <Lightbox
-        slides={photos}
-        open={index >= 0}
-        index={index}
-        close={() => setIndex(-1)}
-        carousel={{
-          finite: true,
-        }}
-        render={{
-          slide: ({ slide, rect }) => (
-            <div style={{ position: "relative", width: rect.width, height: rect.height }}>
-              <img
-                src={slide.src}
-                alt={(slide as any).title || ''}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                }}
-              />
-              {(slide as any).title && (
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    background: "rgba(0, 0, 0, 0.7)",
-                    color: "white",
-                    padding: "1rem",
-                    textAlign: "center",
-                  }}
-                >
-                  {(slide as any).title}
-                </div>
-              )}
-            </div>
-          ),
-        }}
-      />
+      {/* Custom Lightbox */}
+      {selectedImage && (
+        <div
+          className="lightbox-backdrop"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className="lightbox-close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div
+            className="lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Enlarged view"
+              className="lightbox-image"
+            />
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        .gallery-masonry {
+          column-count: 1;
+          column-gap: 16px;
+        }
+
+        @media (min-width: 640px) {
+          .gallery-masonry {
+            column-count: 2;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .gallery-masonry {
+            column-count: 3;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .gallery-masonry {
+            column-count: 4;
+          }
+        }
+
+        .gallery-item {
+          break-inside: avoid;
+          margin-bottom: 16px;
+          border-radius: 8px;
+          overflow: hidden;
+          cursor: pointer;
+        }
+
+        .gallery-item img {
+          width: 100%;
+          display: block;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-item:hover img {
+          transform: scale(1.05);
+        }
+
+        /* Lightbox Styles */
+        .lightbox-backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          padding: 2rem;
+          cursor: pointer;
+        }
+
+        .lightbox-close {
+          position: fixed;
+          top: 1.5rem;
+          right: 1.5rem;
+          background: rgba(255, 255, 255, 0.2);
+          border: 2px solid white;
+          color: white;
+          font-size: 2rem;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10001;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+
+        .lightbox-close:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: rotate(90deg);
+        }
+
+        .lightbox-content {
+          max-width: 90vw;
+          max-height: 90vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: default;
+        }
+
+        .lightbox-image {
+          max-width: 100%;
+          max-height: 90vh;
+          object-fit: contain;
+          border-radius: 8px;
+          box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+      `}</style>
     </div>
   );
 };
 
-export default GalleryPage; 
+export default GalleryPage;

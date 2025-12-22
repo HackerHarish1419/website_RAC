@@ -8,6 +8,8 @@ import ImpactPage from './pages/ImpactPage';
 import GalleryPage from './pages/GalleryPage';
 import PixelTransitionDemo from './pages/PixelTransitionDemo';
 import AdminPage from './pages/AdminPage';
+import AboutUsPage from './pages/AboutUsPage';
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/pixel-transition" element={<PixelTransitionDemo />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/about-us" element={<AboutUsPage />} />
+
           </Routes>
         </main>
         <Footer />

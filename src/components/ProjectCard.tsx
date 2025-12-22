@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiCalendar, FiMapPin } from 'react-icons/fi';
 
@@ -15,6 +15,19 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ title, date, location, description, image, details, gallery, priority = false }: ProjectCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
   return (
     <>
@@ -65,14 +78,14 @@ const ProjectCard = ({ title, date, location, description, image, details, galle
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 overflow-y-auto"
             onClick={() => setIsModalOpen(false)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto relative my-8"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
@@ -118,7 +131,11 @@ const ProjectCard = ({ title, date, location, description, image, details, galle
                           key={index}
                           src={img}
                           alt={`${title} gallery ${index + 1}`}
-                          className="w-full h-20 object-cover rounded"
+                          className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedImage(img);
+                          }}
                         />
                       ))}
                     </div>
@@ -129,6 +146,91 @@ const ProjectCard = ({ title, date, location, description, image, details, galle
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Image Lightbox */}
+      {selectedImage && (
+        <div
+          className="lightbox-backdrop"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className="lightbox-close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div
+            className="lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Enlarged view"
+              className="lightbox-image"
+            />
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        .lightbox-backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+          padding: 2rem;
+          cursor: pointer;
+        }
+
+        .lightbox-close {
+          position: fixed;
+          top: 1.5rem;
+          right: 1.5rem;
+          background: rgba(255, 255, 255, 0.2);
+          border: 2px solid white;
+          color: white;
+          font-size: 2rem;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10001;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+
+        .lightbox-close:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: rotate(90deg);
+        }
+
+        .lightbox-content {
+          max-width: 90vw;
+          max-height: 90vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: default;
+        }
+
+        .lightbox-image {
+          max-width: 100%;
+          max-height: 90vh;
+          object-fit: contain;
+          border-radius: 8px;
+          box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+      `}</style>
     </>
   );
 };

@@ -6,4 +6,10 @@
 // - Render production: https://racrec-api.onrender.com/api
 // - Other backends: https://your-backend-url/api
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const getApiUrl = () => {
+    if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
+    const hostname = window.location.hostname;
+    return `http://${hostname}:5000/api`;
+};
+
+export const API_BASE_URL = getApiUrl();

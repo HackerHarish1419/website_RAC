@@ -3,9 +3,15 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiUsers, FiAward, FiHeart, FiGlobe } from 'react-icons/fi';
 import AnimatedCounter from '../components/AnimatedCounter';
+
 import CircularGallery from '../components/CircularGallery';
 import { API_BASE_URL } from '../config';
-import { projects as defaultProjects } from '../data/projects';
+
+const FLAGSHIP_PROJECTS = [
+  { image: '/gallery/food_donation.png', text: 'Anna Vriksha' },
+  { image: '/gallery/udhiram.png', text: 'UDHIRAM' },
+  { image: '/gallery/victo_ryla.png', text: 'Victo RYLA' },
+];
 
 export default function HomePage() {
   const heroImages = [
@@ -15,10 +21,10 @@ export default function HomePage() {
   ];
 
   const [heroIndex, setHeroIndex] = useState(0);
-  const [projectCount, setProjectCount] = useState(defaultProjects.length);
+  const [projectCount, setProjectCount] = useState(0);
 
   useEffect(() => {
-    const fetchProjectCount = async () => {
+    const fetchProjects = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/projects`);
         if (response.ok) {
@@ -26,10 +32,10 @@ export default function HomePage() {
           setProjectCount(data.length);
         }
       } catch (error) {
-        console.error('Failed to fetch project count:', error);
+        console.error('Failed to fetch projects:', error);
       }
     };
-    fetchProjectCount();
+    fetchProjects();
   }, []);
 
   useEffect(() => {
@@ -38,35 +44,7 @@ export default function HomePage() {
     }, 5000);
     return () => clearInterval(intervalId);
   }, [heroImages.length]);
-  // Sample data - replace with actual data
-  const featuredProjects = [
-    {
-      id: 1,
-      title: "Anna Vriksha",
-      date: "5th September 2024",
-      location: "Rajalakshmi Engineering College",
-      description: "A heartfelt Teachers' Day tribute celebrating mentorship and guidance.",
-      image: "/Communityservice/food website.png"
-    },
-    {
-      id: 2,
-      title: "Udhiram",
-      date: "12th October 2024, 3rd April 2025",
-      location: "Indoor Auditorium, Rajalakshmi Engineering College",
-      description: "A successful blood donation camp uniting students for a life-saving cause.",
-      image: "/Communityservice/udhiram website.png"
-    },
-    {
-      id: 3,
-      title: "Victo-Ryla",
-      date: "30 April 2025",
-      location: "Rajalakshmi Engineering College",
-      description: "Empowering youth through leadership, confidence, and service.",
-      image: "/Professonialservice/Victo_Ryla_New.png",
-      category: "professional",
-      details: "VICTO-RYLA '25 was a one-day leadership summit by the Rotaract Club of Rajalakshmi Engineering College, designed to inspire and empower young individuals through impactful sessions and engaging activities. With powerful talks from renowned speakers including entrepreneurs, innovators, AI specialists, and mental health advocates, the event fostered leadership skills, confidence, and a spirit of service among youth."
-    },
-  ];
+  // Featured projects are now fetched from backend
 
   const testimonials = [
     {
@@ -225,19 +203,15 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          {/* Circular Gallery */}
-          <CircularGallery
-            items={featuredProjects.map(project => ({
-              image: project.image,
-              text: project.title
-            }))}
-            bend={3}
-            textColor="#000000"
-            borderRadius={0.05}
-            font="bold 24px Arial"
-            scrollSpeed={2}
-            scrollEase={0.05}
-          />
+          {/* Signature Projects Gallery */}
+          <div className="mt-16 h-[500px]">
+            <CircularGallery
+              items={FLAGSHIP_PROJECTS}
+              bend={3}
+              textColor="#000000"
+              borderRadius={0.05}
+            />
+          </div>
 
           <motion.div
             className="text-center mt-12"

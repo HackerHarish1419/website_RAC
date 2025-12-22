@@ -77,7 +77,11 @@ const Navbar = () => {
                     onMouseEnter={() => setAboutDropdown(true)}
                     onMouseLeave={() => setAboutDropdown(false)}
                   >
+                    <Link to="/about-us" className="block px-4 py-2 hover:bg-gray-100">
+                      About Us
+                    </Link>
                     <Link to="/story" className="block px-4 py-2 hover:bg-gray-100">
+
                       Our Story
                     </Link>
                     <Link to="/team" className="block px-4 py-2 hover:bg-gray-100">
@@ -126,10 +130,18 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
+                to="/about-us"
+                className="block text-white hover:text-accent transition-colors"
+                onClick={toggleMenu}
+              >
+                About Us
+              </Link>
+              <Link
                 to="/story"
                 className="block text-white hover:text-accent transition-colors"
                 onClick={toggleMenu}
               >
+
                 Our Story
               </Link>
               <Link

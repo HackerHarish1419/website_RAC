@@ -15,9 +15,9 @@ const TeamPage = () => {
 
   const coreLeadership = [
     { name: "Rtr. Sanjit M", title: "President 25-26", image: "/core/RTR SANJIT.png" },
-    { name: "Rtr. Nandhini M", title: "Vice President 25-26", image: "/core/RTR. NANDHINI M.jpg" },
+    { name: "Rtr. Nandhini M", title: "Vice President 25-26", image: "/core/RTR. NANDHINI M.jpg", imageClassName: "object-[center_20%]" },
     { name: "Rtr. Shrinidhi R", title: "Secretary 25-26", image: "/core/RTR. SHRINIDHI R.jpg" },
-    { name: "Rtr. Nethra Shree T D", title: "Joint Secretary 25-26", image: "/core/Nethra 1.jpeg" },
+    { name: "Rtr. Nethra Shree T D", title: "Joint Secretary 25-26", image: "/core/Nethra 1.jpeg", imageClassName: "scale-[1.75] object-[center_20%]" },
     { name: "Rtr. Architha M", title: "Sergeant-At-Arms 25-26", image: "/core/RTR. ARCHITHA M.jpg" },
     { name: "Rtr. Sivadharshan M S", title: "Deputy Sergeant-At-Arms 25-26", image: "/core/RTR. SIVADHARSHAN M S .JPG" },
     { name: "Rtr. Siva Sooryaa", title: "Club Advisor 25-26", image: "/core/RTR. SA SIVA SOORYAA.jpg" },
@@ -43,7 +43,7 @@ const TeamPage = () => {
 
   const boardCoordinators = [
     { name: "Rtr. Aadithya R", title: "Club Coordinator 25-26", image: "/board/Aadithya R.jpeg" },
-    { name: "Rtr. Adithya N", title: "Club Coordinator 25-26", image: "/board/Adithya N.png" },
+    { name: "Rtr. Adithya N", title: "Club Coordinator 25-26", image: "/board/Adithya N.PNG" },
     { name: "Rtr. Akshara G", title: "Club Coordinator 25-26", image: "/board/Akshara G.jpg" },
     { name: "Rtr. Akshith R", title: "Club Coordinator 25-26", image: "/board/Akshith R.jpg" },
     { name: "Rtr. Angel Antony", title: "Club Coordinator 25-26", image: "/board/Angel Antony.png" },
@@ -54,7 +54,7 @@ const TeamPage = () => {
     { name: "Rtr. Lakshan S", title: "Club Coordinator 25-26", image: "/board/Lakshan S.png" },
     { name: "Rtr. Meenashi S", title: "Club Coordinator 25-26", image: "/board/Meenashi S.jpg" },
     { name: "Rtr. Nandhini Velmurugan", title: "Club Coordinator 25-26", image: "/board/Nandhini Velmurugan.jpg" },
-    { name: "Rtr. Nikhilesh Anand", title: "Club Coordinator 25-26", image: "/board/Nikhilesh Anand.jpg" },
+    { name: "Rtr. Nikhilesh Anand", title: "Club Coordinator 25-26", image: "/board/Nikhilesh Anand.jpg", imageClassName: "object-[center_top]" },
     { name: "Rtr. Nila Elango", title: "Club Coordinator 25-26", image: "/board/Nila Elango.jpg" },
     { name: "Rtr. Praveen R", title: "Club Coordinator 25-26", image: "/board/Praveen R.jpg" },
     { name: "Rtr. Rubaa Kumar K S", title: "Club Coordinator 25-26", image: "/board/Rubaa Kumar K S.jpg" },

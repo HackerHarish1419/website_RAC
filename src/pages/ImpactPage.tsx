@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import { API_BASE_URL } from '../config';
-import { projects as defaultProjects } from '../data/projects';
 
 const ImpactPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -15,25 +14,23 @@ const ImpactPage = () => {
       try {
         const response = await fetch(`${API_BASE_URL}/projects`);
         const data = await response.json();
-        // Map backend projects to display format and combine with existing hardcoded ones
         const backendProjects = data.map((p: any) => ({
-          id: p.id + 1000, // Offset to avoid conflicts
+          id: p.id, // Use actual ID from backend
           title: p.title,
           date: p.eventDate || (p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-GB').replace(/\//g, '-') : 'Recent'),
           location: p.venue || 'RACREC',
-          description: p.oneLiner || p.description, // Use one-liner for card, fallback to description
+          description: p.oneLiner || p.description,
           image: p.image ? `${API_BASE_URL}/uploads/${p.image}` : '/default-image.jpg',
           category: p.avenue,
-          details: p.description, // Full description for modal
+          details: p.description,
           isSignature: p.isSignature,
           status: p.status
         }));
         setProjects(backendProjects);
         setLoading(false);
       } catch (error) {
-        console.log('Backend not available, using default projects');
-        // If backend is not available, use default projects
-        setProjects(defaultProjects);
+        console.error('Failed to fetch projects from backend:', error);
+        setProjects([]); // Don't fall back to old projects as requested
         setLoading(false);
       }
     };
