@@ -17,7 +17,7 @@ const TeamPage = () => {
     { name: "Rtr. Sanjit M", title: "President 25-26", image: "/core/RTR SANJIT.png" },
     { name: "Rtr. Nandhini M", title: "Vice President 25-26", image: "/core/RTR. NANDHINI M.jpg", imageClassName: "object-[center_20%]" },
     { name: "Rtr. Shrinidhi R", title: "Secretary 25-26", image: "/core/RTR. SHRINIDHI R.jpg" },
-    { name: "Rtr. Nethra Shree T D", title: "Joint Secretary 25-26", image: "/public/core/RTR. NETHRA.png" },
+    { name: "Rtr. Nethra Shree T D", title: "Joint Secretary 25-26", image: "/core/RTR NETHRA.png" },
     { name: "Rtr. Architha M", title: "Sergeant-At-Arms 25-26", image: "/core/RTR. ARCHITHA M.jpg" },
     { name: "Rtr. Sivadharshan M S", title: "Deputy Sergeant-At-Arms 25-26", image: "/core/RTR. SIVADHARSHAN M S .JPG" },
     { name: "Rtr. Siva Sooryaa", title: "Club Advisor 25-26", image: "/core/RTR. SA SIVA SOORYAA.jpg" },
