@@ -32,20 +32,26 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="bg-primary bg-opacity-25 text-white fixed top-4 z-50 left-0 right-0 mx-auto rounded-full shadow-2xl backdrop-blur-md border border-secondary border-opacity-50 w-[95%] max-w-4xl"
+      className="bg-primary bg-opacity-25 text-white fixed top-4 z-50 left-0 right-0 mx-auto rounded-full shadow-2xl backdrop-blur-md border border-secondary border-opacity-50 w-[95%] max-w-5xl"
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between h-16 px-8">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img
+              src="/REC_Logo_Color_PNG_RGB.png"
+              alt="Clg Logo"
+              loading="eager"
+              className="w-14 h-14 md:w-20 md:h-20 object-contain"
+            />
+            <img
               src="/club_logo_1_1.png"
               alt="Rotaract club of rec logo"
               loading="eager"
-              className="w-12 h-12 md:w-16 md:h-16 object-contain"
+              className="w-12 h-12 md:w-20 md:h-20 object-contain"
             />
             <span className="font-bold text-lg md:text-xl hidden sm:block">Rotaract Club of REC</span>
             <span className="font-bold text-lg block sm:hidden">RACREC</span>
